@@ -20,7 +20,7 @@ This will scan the current directory (should be your `Custom Scenery`) and repla
 ### Transform/Tidy up mode
 `./xpss.py -i scenery_packs.ini -o scenery_packs.ini`
 
-This will read in scenery_packs.ini and replaces it withj a sorted version
+This will read in scenery_packs.ini and replaces it with a sorted version
 
 
 

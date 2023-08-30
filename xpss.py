@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
-
 #pip install pandas
-
-
-# In[3]:
 
 
 #Xplane scenery sorter
@@ -16,8 +10,18 @@ import pandas as pd
 
 # In[138]:
 
+filename='scenery_packs.ini'
 
-with open('scenery_packs.ini') as f:
+outfilename=False
+
+import sys
+if len(sys.argv)>1: filename=sys.argv[1]
+if len(sys.argv)>2: outfilename=sys.argv[2]
+
+sys.stderr.write("xpss\n")
+sys.stderr.write("processing "+filename+"\n\n")
+
+with open(filename) as f:
     lines = f.readlines()
     
 sceneries = list(map(lambda x:x.strip(),list(filter(lambda x:x.startswith("SCENERY_PACK"), lines))))
@@ -84,4 +88,11 @@ scen_enabled = list(map(lambda x: x[1], list(filter(lambda x: x[0]>=0, result)))
 
 
 inistr = list(map(lambda x: "SCENERY_DISABLED "+x, scen_disabled)) + list(map(lambda x: "SCENERY "+x, scen_enabled))
-print('\n'.join(header+inistr))
+if outfilename:
+    print("Writing to "+outfilename)
+    of = open(outfilename, "w")
+    of.write('\n'.join(header+inistr))
+    of.close()
+else:
+    sys.stderr.write("writing to stdout as no outfile was given\n\n\n")
+    print('\n'.join(header+inistr))

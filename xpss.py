@@ -87,11 +87,12 @@ scen_enabled = list(map(lambda x: x[1], list(filter(lambda x: x[0]>=0, result)))
 # In[192]:
 
 
-inistr = list(map(lambda x: "SCENERY_DISABLED "+x, scen_disabled)) + list(map(lambda x: "SCENERY "+x, scen_enabled))
+inistr = list(map(lambda x: "SCENERY_PACK_DISABLED "+x, scen_disabled)) + list(map(lambda x: "SCENERY_PACK "+x, scen_enabled))
 if outfilename:
     print("Writing to "+outfilename)
     of = open(outfilename, "w")
     of.write('\n'.join(header+inistr))
+    of.write('\n')
     of.close()
 else:
     sys.stderr.write("writing to stdout as no outfile was given\n\n\n")

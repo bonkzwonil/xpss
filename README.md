@@ -11,7 +11,7 @@ Advise: Place it in your `Custom  Scenery` - Folder
 `python xpss.py ` 
 This will read `scenery_packs.ini` and `config.txt` in current directory and print out new config
 
-an update cycle can therefore be done like this: `python xpss.py > scenery_packs.ini`
+
 
 it will remove doublettes automatically
 

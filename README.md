@@ -13,6 +13,15 @@ This will read `scenery_packs.ini` and `config.txt` in current directory and pri
 
 an update cycle can therefore be done like this: `python xpss.py > scenery_packs.ini`
 
+it will remove doublettes automatically, so you can utilize something like that:
+
+```
+find Custom\ Scenery/ -type d -maxdepth 1 >> Custom\ Scenery/scenery_packs.ini
+cd Custom\ Scenery
+python xpss.py > scenery_packs.ini
+```
+
+
 ## configuration
 `config.txt` is a simple config file where each line is a sorting number and a substring. 
 e.g.: `9 Library` moves all sceneries containing the substring `Library` to category 9

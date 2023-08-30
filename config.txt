@@ -3,7 +3,7 @@
 
 #you can disable stuff with negative numbers
 #-1 z_a
-#-1 yAutoOrtho
+-1 yAutoOrtho_Overlays
 
 # GLobal Airports on top
 0 *GLOBAL_AIRPORTS*

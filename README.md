@@ -3,7 +3,7 @@ X-Plane Scenery Sorter
 
 ## About
 
-xpss is a free lightweight scenery_packs.ini sorter for X-Plane.
+xpss is a free lightweight scenery_packs.ini sorter/manager  for X-Plane.
 
 ## Usage
 Advise: Place it in your `Custom  Scenery` - Folder

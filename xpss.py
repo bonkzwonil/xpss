@@ -21,6 +21,7 @@ with open('scenery_packs.ini') as f:
     lines = f.readlines()
     
 sceneries = list(map(lambda x:x.strip(),list(filter(lambda x:x.startswith("SCENERY_PACK"), lines))))
+header = list(map(lambda x:x.strip(),lines[0:4])) #first 4 lines -- obviously dirty :)
 
 
 # In[170]:
@@ -83,5 +84,4 @@ scen_enabled = list(map(lambda x: x[1], list(filter(lambda x: x[0]>=0, result)))
 
 
 inistr = list(map(lambda x: "SCENERY_DISABLED "+x, scen_disabled)) + list(map(lambda x: "SCENERY "+x, scen_enabled))
-print('\n'.join(inistr))
-
+print('\n'.join(header+inistr))

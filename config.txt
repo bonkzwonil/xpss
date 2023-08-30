@@ -1,0 +1,29 @@
+# xpss config file
+## <number> <regexp>
+
+#disable ao
+-1 z_a
+-1 yAutoOrtho
+
+# GLobal Airports on top
+0 *GLOBAL_AIRPORTS*
+
+1 Aerosoft
+
+1 Airport
+
+2 VFR
+
+2 Landmarks
+
+3 simHeaven
+
+4 zOrtho4XP_
+
+9 library
+9 Library
+9 _Lib
+9 Rescue
+9 Scenery
+9 ruscenery
+

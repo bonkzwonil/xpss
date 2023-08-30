@@ -43,6 +43,7 @@ if not args.scandir:
 if args.scandir:
     import os
     dirs = os.listdir(args.scandir)
+    if args.debug: sys.stderr.writelines(dirs)
     sceneries = list(map(lambda x: "Custom Scenery/"+x+"/", filter(lambda x: os.path.isdir(x) and not x.startswith("."), dirs)))
     sceneries += ['*GLOBAL_AIRPORTS*']
     folders = sceneries

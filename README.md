@@ -6,7 +6,7 @@ X-Plane Scenery Sorter
 xpss is a free lightweight scenery_packs.ini sorter/manager  for X-Plane.
 
 ## Usage
-Advise: Place it in your `Custom  Scenery` - Folder
+Place it in your `Custom  Scenery` - Folder
 
 `python xpss.py ` or `./xpss.py`This will read `scenery_packs.ini` and `config.txt` in current directory and print out new config
 

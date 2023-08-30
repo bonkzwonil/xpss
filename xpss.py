@@ -38,6 +38,7 @@ if not args.scandir:
     
     sceneries = list(map(lambda x:x.strip(),list(filter(lambda x:x.startswith("SCENERY_PACK"), lines))))
     header = list(map(lambda x:x.strip(),lines[0:4])) #first 4 lines -- obviously dirty :)
+    folders = False
 
 if args.scandir:
     import os
@@ -86,7 +87,7 @@ def findcat(txt, conf):
 # In[160]:
 
 
-folders = folders or list(map(lambda x: " ".join(x.split()[1:]), sceneries))
+if not folders: folders = list(map(lambda x: " ".join(x.split()[1:]), sceneries))
 
 
 # In[171]:

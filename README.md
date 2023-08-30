@@ -28,3 +28,5 @@ it will remove doublettes automatically
 ## configuration
 `config.txt` is a simple config file where each line is a sorting number and a substring. 
 e.g.: `9 Library` moves all sceneries containing the substring `Library` to category 9
+
+see [Example Config File](config.txt)

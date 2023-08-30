@@ -7,32 +7,57 @@
 #Xplane scenery sorter
 import pandas as pd
 
+import argparse
+parser = argparse.ArgumentParser(
+                    prog='xpss',
+                    description='X-Plane Scenery Sorter',
+                    epilog='(C)2023 bonk')
 
-# In[138]:
+parser.add_argument('-i', '--ini', help='read scenery_pack.ini input file, default: scenery_packs.ini', default='scenery_packs.ini')
+parser.add_argument('-s', '--scandir', help='dont read ini file but scan Custom Scenery directory', default=False)
+parser.add_argument('-c', '--config', help='specify config file, default: config.txt', default='config.txt')
+parser.add_argument('-o','--out', help='write output to file', default=False)
+#parser.add_argument('--dry', help='dryrun')
+parser.add_argument('-d','--debug', help='debug', action='store_true')
+args = parser.parse_args()
 
-filename='scenery_packs.ini'
+print(args)
 
-outfilename=False
+filename=args.ini
+
+
 
 import sys
-if len(sys.argv)>1: filename=sys.argv[1]
-if len(sys.argv)>2: outfilename=sys.argv[2]
 
 sys.stderr.write("xpss\n")
-sys.stderr.write("processing "+filename+"\n\n")
 
-with open(filename) as f:
-    lines = f.readlines()
+if not args.scandir:
+    sys.stderr.write("processing "+filename+"\n\n")
+    with open(filename) as f:
+        lines = f.readlines()
     
-sceneries = list(map(lambda x:x.strip(),list(filter(lambda x:x.startswith("SCENERY_PACK"), lines))))
-header = list(map(lambda x:x.strip(),lines[0:4])) #first 4 lines -- obviously dirty :)
+    sceneries = list(map(lambda x:x.strip(),list(filter(lambda x:x.startswith("SCENERY_PACK"), lines))))
+    header = list(map(lambda x:x.strip(),lines[0:4])) #first 4 lines -- obviously dirty :)
+
+if args.scandir:
+    import os
+    dirs = os.listdir(args.scandir)
+    sceneries = list(map(lambda x: "Custom Scenery/"+x+"/", filter(lambda x: os.path.isdir(x) and not x.startswith("."), dirs)))
+    sceneries += ['*GLOBAL_AIRPORTS*']
+    folders = sceneries
+    header = ["I","1000 Version","SCENERY", ""]
+
+
+
+
+if args.debug: sys.stderr.write(",".join(sceneries)+"\n" )
 
 
 # In[170]:
 
 
 ## Load Config File
-with open('config.txt') as f:
+with open(args.config) as f:
     lines = f.readlines()
     
 config = map(lambda x: {
@@ -61,7 +86,7 @@ def findcat(txt, conf):
 # In[160]:
 
 
-folders = list(map(lambda x: " ".join(x.split()[1:]), sceneries))
+folders = folders or list(map(lambda x: " ".join(x.split()[1:]), sceneries))
 
 
 # In[171]:
@@ -88,9 +113,9 @@ scen_enabled = list(map(lambda x: x[1], list(filter(lambda x: x[0]>=0, result)))
 
 
 inistr = list(map(lambda x: "SCENERY_PACK_DISABLED "+x, scen_disabled)) + list(map(lambda x: "SCENERY_PACK "+x, scen_enabled))
-if outfilename:
-    print("Writing to "+outfilename)
-    of = open(outfilename, "w")
+if args.out:
+    print("Writing to "+args.out)
+    of = open(args.out, "w")
     of.write('\n'.join(header+inistr))
     of.write('\n')
     of.close()
